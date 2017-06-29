@@ -1,0 +1,85 @@
+[
+    {
+        "name": "xiaoler/blade",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/XiaoLer/blade.git",
+            "reference": "a3fe5dc53d0110cb1810c7ba887a90308f09cff7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/XiaoLer/blade/zipball/a3fe5dc53d0110cb1810c7ba887a90308f09cff7",
+            "reference": "a3fe5dc53d0110cb1810c7ba887a90308f09cff7",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2016-12-18T03:52:13+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "files": [
+                "src/helpers.php"
+            ],
+            "psr-4": {
+                "Xiaoler\\Blade\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Scholer Liu",
+                "email": "scholer_l@live.com"
+            }
+        ],
+        "description": "an independent version of laravel view template - blade",
+        "homepage": "http://0x1.im"
+    },
+    {
+        "name": "vrana/notorm",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vrana/notorm.git",
+            "reference": "e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/vrana/notorm/zipball/e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd",
+            "reference": "e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd",
+            "shasum": ""
+        },
+        "time": "2014-10-30T16:55:08+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "files": [
+                "NotORM.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0",
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Jakub Vrana",
+                "homepage": "http://www.vrana.cz/"
+            }
+        ],
+        "description": "NotORM is a PHP library for simple working with data in the database.",
+        "homepage": "http://www.notorm.com/",
+        "keywords": [
+            "database",
+            "dbal"
+        ]
+    }
+]
