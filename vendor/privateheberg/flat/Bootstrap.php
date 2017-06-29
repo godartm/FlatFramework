@@ -3,17 +3,13 @@
 namespace PrivateHeberg\Flat;
 
 
-use PrivateHeberg\Flat\ErrorReporting\ErrorController;
 use PrivateHeberg\Flat\Event\Event;
 use PrivateHeberg\Flat\Event\EventWrapper\FinishLoadEvent;
-use PrivateHeberg\Flat\Event\EventWrapper\ViolationEvent;
 use PrivateHeberg\Flat\Exception\ActionNotFoundException;
 use PrivateHeberg\Flat\Exception\BadRouteSyntaxeException;
 use PrivateHeberg\Flat\Exception\BootstrapArgumentException;
 use PrivateHeberg\Flat\Exception\ControllerNotFoundException;
 use PrivateHeberg\Flat\Exception\RouterNotFoundException;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run;
 
 class Bootstrap
 {

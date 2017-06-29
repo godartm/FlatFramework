@@ -28,37 +28,6 @@ class RunTest extends TestCase
     }
 
     /**
-     * @param  string    $message
-     * @return Exception
-     */
-    protected function getException($message = null)
-    {
-        // HHVM does not support mocking exceptions
-        // Since we do not use any additional features of Mockery for exceptions,
-        // we can just use native Exceptions instead.
-        return new \Exception($message);
-    }
-
-    /**
-     * @return Handler
-     */
-    protected function getHandler()
-    {
-        return m::mock('Whoops\\Handler\\Handler')
-            ->shouldReceive('setRun')
-                ->andReturn(null)
-            ->mock()
-
-            ->shouldReceive('setInspector')
-                ->andReturn(null)
-            ->mock()
-
-            ->shouldReceive('setException')
-                ->andReturn(null)
-            ->mock();
-    }
-
-    /**
      * @covers Whoops\Run::clearHandlers
      */
     public function testClearHandlers()
@@ -93,6 +62,23 @@ class RunTest extends TestCase
     }
 
     /**
+     * @return Handler
+     */
+    protected function getHandler()
+    {
+        return m::mock('Whoops\\Handler\\Handler')
+            ->shouldReceive('setRun')
+            ->andReturn(null)
+            ->mock()
+            ->shouldReceive('setInspector')
+            ->andReturn(null)
+            ->mock()
+            ->shouldReceive('setException')
+            ->andReturn(null)
+            ->mock();
+    }
+
+    /**
      * @expectedException InvalidArgumentException
      * @covers Whoops\Run::pushHandler
      */
@@ -108,7 +94,8 @@ class RunTest extends TestCase
     public function testPushClosureBecomesHandler()
     {
         $run = $this->getRunInstance();
-        $run->pushHandler(function () {});
+        $run->pushHandler(function () {
+        });
         $this->assertInstanceOf('Whoops\\Handler\\CallbackHandler', $run->popHandler());
     }
 
@@ -120,8 +107,8 @@ class RunTest extends TestCase
     {
         $run = $this->getRunInstance();
 
-        $handlerOne   = $this->getHandler();
-        $handlerTwo   = $this->getHandler();
+        $handlerOne = $this->getHandler();
+        $handlerTwo = $this->getHandler();
         $handlerThree = $this->getHandler();
 
         $run->pushHandler($handlerOne);
@@ -171,6 +158,19 @@ class RunTest extends TestCase
     }
 
     /**
+     * @param  string $message
+     *
+     * @return Exception
+     */
+    protected function getException($message = null)
+    {
+        // HHVM does not support mocking exceptions
+        // Since we do not use any additional features of Mockery for exceptions,
+        // we can just use native Exceptions instead.
+        return new \Exception($message);
+    }
+
+    /**
      * @covers Whoops\Run::pushHandler
      * @covers Whoops\Run::getHandlers
      */
@@ -178,10 +178,10 @@ class RunTest extends TestCase
     {
         $run = $this->getRunInstance();
 
-        $handlerOne   = $this->getHandler();
-        $handlerTwo   = $this->getHandler();
+        $handlerOne = $this->getHandler();
+        $handlerTwo = $this->getHandler();
         $handlerThree = $this->getHandler();
-        $handlerFour  = $this->getHandler();
+        $handlerFour = $this->getHandler();
 
         $run->pushHandler($handlerOne);
         $run->pushHandler($handlerTwo);
@@ -203,20 +203,26 @@ class RunTest extends TestCase
      */
     public function testHandlersGonnaHandle()
     {
-        $run       = $this->getRunInstance();
+        $run = $this->getRunInstance();
         $exception = $this->getException();
-        $order     = new ArrayObject();
+        $order = new ArrayObject();
 
-        $handlerOne   = $this->getHandler();
-        $handlerTwo   = $this->getHandler();
+        $handlerOne = $this->getHandler();
+        $handlerTwo = $this->getHandler();
         $handlerThree = $this->getHandler();
 
         $handlerOne->shouldReceive('handle')
-            ->andReturnUsing(function () use ($order) { $order[] = 1; });
+            ->andReturnUsing(function () use ($order) {
+                $order[] = 1;
+            });
         $handlerTwo->shouldReceive('handle')
-            ->andReturnUsing(function () use ($order) { $order[] = 2; });
+            ->andReturnUsing(function () use ($order) {
+                $order[] = 2;
+            });
         $handlerThree->shouldReceive('handle')
-            ->andReturnUsing(function () use ($order) { $order[] = 3; });
+            ->andReturnUsing(function () use ($order) {
+                $order[] = 3;
+            });
 
         $run->pushHandler($handlerOne);
         $run->pushHandler($handlerTwo);
@@ -226,7 +232,7 @@ class RunTest extends TestCase
         // are given the handler, and in the inverse order they were
         // registered.
         $run->handleException($exception);
-        $this->assertEquals((array) $order, [3, 2, 1]);
+        $this->assertEquals((array)$order, [3, 2, 1]);
     }
 
     /**
@@ -304,6 +310,7 @@ class RunTest extends TestCase
         } catch (\ErrorException $e) {
             // Do nothing
             $this->assertTrue(true);
+
             return;
         }
         $this->fail('Should not continue here, should have been caught.');
@@ -353,7 +360,7 @@ class RunTest extends TestCase
                 $test->fail('$handler should not be called, silenceErrorsInPaths not respected');
             });
 
-        $run->silenceErrorsInPaths('@^'.preg_quote(__FILE__, '@').'$@', E_USER_NOTICE);
+        $run->silenceErrorsInPaths('@^' . preg_quote(__FILE__, '@') . '$@', E_USER_NOTICE);
         trigger_error('Test', E_USER_NOTICE);
         $this->assertTrue(true);
     }
@@ -394,7 +401,7 @@ class RunTest extends TestCase
             $this->assertSame(99, $e->getLine());
         }
     }
-    
+
     /**
      * @covers Whoops\Run::handleException
      * @covers Whoops\Run::writeToOutput

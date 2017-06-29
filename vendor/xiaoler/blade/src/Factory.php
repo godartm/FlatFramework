@@ -87,7 +87,8 @@ class Factory
     /**
      * Create a new view factory instance.
      *
-     * @param  \Xiaoler\Blade\ViewFinderInterface  $finder
+     * @param  \Xiaoler\Blade\ViewFinderInterface $finder
+     *
      * @return void
      */
     public function __construct(EngineInterface $engine, ViewFinderInterface $finder)
@@ -101,8 +102,9 @@ class Factory
     /**
      * Add a piece of shared data to the environment.
      *
-     * @param  array|string  $key
-     * @param  mixed  $value
+     * @param  array|string $key
+     * @param  mixed $value
+     *
      * @return mixed
      */
     public function share($key, $value = null)
@@ -119,9 +121,10 @@ class Factory
     /**
      * Get the evaluated view contents for the given view.
      *
-     * @param  string  $path
-     * @param  array   $data
-     * @param  array   $mergeData
+     * @param  string $path
+     * @param  array $data
+     * @param  array $mergeData
+     *
      * @return \Xiaoler\Blade\View
      */
     public function file($path, $data = [], $mergeData = [])
@@ -136,8 +139,9 @@ class Factory
     /**
      * Get the evaluated view contents for a named view.
      *
-     * @param  string  $view
-     * @param  mixed   $data
+     * @param  string $view
+     * @param  mixed $data
+     *
      * @return \Xiaoler\Blade\View
      */
     public function of($view, $data = [])
@@ -148,9 +152,10 @@ class Factory
     /**
      * Get the evaluated view contents for the given view.
      *
-     * @param  string  $view
-     * @param  array   $data
-     * @param  array   $mergeData
+     * @param  string $view
+     * @param  array $data
+     * @param  array $mergeData
+     *
      * @return \Xiaoler\Blade\View
      */
     public function make($view, $data = [], $mergeData = [])
@@ -174,6 +179,7 @@ class Factory
      * Normalize a view name.
      *
      * @param  string $name
+     *
      * @return string
      */
     protected function normalizeName($name)
@@ -186,14 +192,15 @@ class Factory
 
         list($namespace, $name) = explode($delimiter, $name);
 
-        return $namespace.$delimiter.str_replace('/', '.', $name);
+        return $namespace . $delimiter . str_replace('/', '.', $name);
     }
 
     /**
      * Register a named view.
      *
-     * @param  string  $view
-     * @param  string  $name
+     * @param  string $view
+     * @param  string $name
+     *
      * @return void
      */
     public function name($view, $name)
@@ -204,8 +211,9 @@ class Factory
     /**
      * Add an alias for a view.
      *
-     * @param  string  $view
-     * @param  string  $alias
+     * @param  string $view
+     * @param  string $alias
+     *
      * @return void
      */
     public function alias($view, $alias)
@@ -216,7 +224,8 @@ class Factory
     /**
      * Determine if a given view exists.
      *
-     * @param  string  $view
+     * @param  string $view
+     *
      * @return bool
      */
     public function exists($view)
@@ -233,10 +242,11 @@ class Factory
     /**
      * Get the rendered contents of a partial from a loop.
      *
-     * @param  string  $view
-     * @param  array   $data
-     * @param  string  $iterator
-     * @param  string  $empty
+     * @param  string $view
+     * @param  array $data
+     * @param  string $iterator
+     * @param  string $empty
+     *
      * @return string
      */
     public function renderEach($view, $data, $iterator, $empty = 'raw|')
@@ -271,8 +281,9 @@ class Factory
     /**
      * Inject inline content into a section.
      *
-     * @param  string  $section
-     * @param  string  $content
+     * @param  string $section
+     * @param  string $content
+     *
      * @return void
      */
     public function inject($section, $content)
@@ -283,8 +294,9 @@ class Factory
     /**
      * Start injecting content into a section.
      *
-     * @param  string  $section
-     * @param  string  $content
+     * @param  string $section
+     * @param  string $content
+     *
      * @return void
      */
     public function startSection($section, $content = '')
@@ -301,8 +313,9 @@ class Factory
     /**
      * Append content to a given section.
      *
-     * @param  string  $section
-     * @param  string  $content
+     * @param  string $section
+     * @param  string $content
+     *
      * @return void
      */
     protected function extendSection($section, $content)
@@ -327,8 +340,9 @@ class Factory
     /**
      * Get the string contents of a section.
      *
-     * @param  string  $section
-     * @param  string  $default
+     * @param  string $section
+     * @param  string $default
+     *
      * @return string
      */
     public function yieldContent($section, $default = '')
@@ -349,7 +363,8 @@ class Factory
     /**
      * Stop injecting content into a section.
      *
-     * @param  bool  $overwrite
+     * @param  bool $overwrite
+     *
      * @return string
      */
     public function stopSection($overwrite = false)
@@ -386,8 +401,9 @@ class Factory
     /**
      * Start injecting content into a push section.
      *
-     * @param  string  $section
-     * @param  string  $content
+     * @param  string $section
+     * @param  string $content
+     *
      * @return void
      */
     public function startPush($section, $content = '')
@@ -404,16 +420,17 @@ class Factory
     /**
      * Append content to a given push section.
      *
-     * @param  string  $section
-     * @param  string  $content
+     * @param  string $section
+     * @param  string $content
+     *
      * @return void
      */
     protected function extendPush($section, $content)
     {
-        if (! isset($this->pushes[$section])) {
+        if (!isset($this->pushes[$section])) {
             $this->pushes[$section] = [];
         }
-        if (! isset($this->pushes[$section][$this->renderCount])) {
+        if (!isset($this->pushes[$section][$this->renderCount])) {
             $this->pushes[$section][$this->renderCount] = $content;
         } else {
             $this->pushes[$section][$this->renderCount] .= $content;
@@ -442,13 +459,14 @@ class Factory
     /**
      * Get the string contents of a push section.
      *
-     * @param  string  $section
-     * @param  string  $default
+     * @param  string $section
+     * @param  string $default
+     *
      * @return string
      */
     public function yieldPushContent($section, $default = '')
     {
-        if (! isset($this->pushes[$section])) {
+        if (!isset($this->pushes[$section])) {
             return $default;
         }
 
@@ -512,7 +530,8 @@ class Factory
     /**
      * Add new loop to the stack.
      *
-     * @param  array|\Countable  $data
+     * @param  array|\Countable $data
+     *
      * @return void
      */
     public function addLoop($data)
@@ -523,13 +542,13 @@ class Factory
 
         $this->loopsStack[] = [
             'iteration' => 0,
-            'index' => 0,
+            'index'     => 0,
             'remaining' => isset($length) ? $length : null,
-            'count' => $length,
-            'first' => true,
-            'last' => isset($length) ? $length == 1 : null,
-            'depth' => count($this->loopsStack) + 1,
-            'parent' => $parent ? (object) $parent : null,
+            'count'     => $length,
+            'first'     => true,
+            'last'      => isset($length) ? $length == 1 : null,
+            'depth'     => count($this->loopsStack) + 1,
+            'parent'    => $parent ? (object)$parent : null,
         ];
     }
 
@@ -571,7 +590,7 @@ class Factory
      */
     public function getFirstLoop()
     {
-        return ($last = end($this->loopsStack)) ? (object) $last : null;
+        return ($last = end($this->loopsStack)) ? (object)$last : null;
     }
 
     /**
@@ -587,7 +606,8 @@ class Factory
     /**
      * Add a location to the array of view locations.
      *
-     * @param  string  $location
+     * @param  string $location
+     *
      * @return void
      */
     public function addLocation($location)
@@ -598,8 +618,9 @@ class Factory
     /**
      * Add a new namespace to the loader.
      *
-     * @param  string  $namespace
-     * @param  string|array  $hints
+     * @param  string $namespace
+     * @param  string|array $hints
+     *
      * @return void
      */
     public function addNamespace($namespace, $hints)
@@ -610,8 +631,9 @@ class Factory
     /**
      * Prepend a new namespace to the loader.
      *
-     * @param  string  $namespace
-     * @param  string|array  $hints
+     * @param  string $namespace
+     * @param  string|array $hints
+     *
      * @return void
      */
     public function prependNamespace($namespace, $hints)
@@ -632,7 +654,8 @@ class Factory
     /**
      * Set the view finder instance.
      *
-     * @param  \Xiaoler\Blade\ViewFinderInterface  $finder
+     * @param  \Xiaoler\Blade\ViewFinderInterface $finder
+     *
      * @return void
      */
     public function setFinder(ViewFinderInterface $finder)
@@ -643,8 +666,9 @@ class Factory
     /**
      * Get an item from the shared data.
      *
-     * @param  string  $key
-     * @param  mixed   $default
+     * @param  string $key
+     * @param  mixed $default
+     *
      * @return mixed
      */
     public function shared($key, $default = null)
@@ -665,7 +689,8 @@ class Factory
     /**
      * Check if section exists.
      *
-     * @param  string  $name
+     * @param  string $name
+     *
      * @return bool
      */
     public function hasSection($name)

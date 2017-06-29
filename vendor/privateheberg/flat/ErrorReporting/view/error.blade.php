@@ -48,6 +48,7 @@
             border-radius: 5px;
             padding: 15px;
         }
+
         .id {
             display: inline-block;
             padding: 0;
@@ -63,6 +64,7 @@
             margin-top: 10px;
 
         }
+
         .code {
             display: inline-block;
             margin: 0;
@@ -77,6 +79,7 @@
             padding: 1%;
 
         }
+
         .line {
             font-size: 12px;
             color: #6c6c6c;
@@ -92,7 +95,7 @@
 
 <div class="content">
 
-@foreach($trace as $t)
+    @foreach($trace as $t)
 
         <pre>
 

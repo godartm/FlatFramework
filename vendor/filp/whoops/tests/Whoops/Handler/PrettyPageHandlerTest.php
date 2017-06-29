@@ -13,31 +13,13 @@ use Whoops\TestCase;
 class PrettyPageHandlerTest extends TestCase
 {
     /**
-     * @return \Whoops\Handler\PrettyPageHandler
-     */
-    private function getHandler()
-    {
-        $handler = new PrettyPageHandler();
-        $handler->handleUnconditionally();
-        return $handler;
-    }
-
-    /**
-     * @return RuntimeException
-     */
-    public function getException()
-    {
-        return new RuntimeException();
-    }
-
-    /**
      * Test that PrettyPageHandle handles the template without
      * any errors.
      * @covers Whoops\Handler\PrettyPageHandler::handle
      */
     public function testHandleWithoutErrors()
     {
-        $run     = $this->getRunInstance();
+        $run = $this->getRunInstance();
         $handler = $this->getHandler();
 
         $run->pushHandler($handler);
@@ -48,6 +30,25 @@ class PrettyPageHandlerTest extends TestCase
 
         // Reached the end without errors
         $this->assertTrue(true);
+    }
+
+    /**
+     * @return \Whoops\Handler\PrettyPageHandler
+     */
+    private function getHandler()
+    {
+        $handler = new PrettyPageHandler();
+        $handler->handleUnconditionally();
+
+        return $handler;
+    }
+
+    /**
+     * @return RuntimeException
+     */
+    public function getException()
+    {
+        return new RuntimeException();
     }
 
     /**
@@ -101,7 +102,7 @@ class PrettyPageHandlerTest extends TestCase
         $this->assertEmpty($handler->getDataTables());
 
         $tableOne = [
-            'ice' => 'cream',
+            'ice'     => 'cream',
             'ice-ice' => 'baby',
         ];
 
@@ -158,13 +159,13 @@ class PrettyPageHandlerTest extends TestCase
         // Test inspector parameter in data table callback
         $table4 = function (\Whoops\Exception\Inspector $inspector) use ($expected1) {
             return array(
-              'Exception class' => get_class($inspector->getException()),
-              'Exception message' => $inspector->getExceptionMessage(),
+                'Exception class'   => get_class($inspector->getException()),
+                'Exception message' => $inspector->getExceptionMessage(),
             );
         };
         $expected4 = array(
-          'Exception class' => 'InvalidArgumentException',
-          'Exception message' => 'Test exception message',
+            'Exception class'   => 'InvalidArgumentException',
+            'Exception message' => 'Test exception message',
         );
         $inspectorForTable4 = new \Whoops\Exception\Inspector(
             new \InvalidArgumentException('Test exception message')
@@ -238,6 +239,7 @@ class PrettyPageHandlerTest extends TestCase
         $handler->setEditor(function ($file, $line) {
             $file = rawurlencode($file);
             $line = rawurlencode($line);
+
             return "http://google.com/search/?q=$file:$line";
         });
 
@@ -250,8 +252,9 @@ class PrettyPageHandlerTest extends TestCase
         $handler->setEditor(function ($file, $line) {
             $file = rawurlencode($file);
             $line = rawurlencode($line);
+
             return [
-                'url' => "http://google.com/search/?q=$file:$line",
+                'url'  => "http://google.com/search/?q=$file:$line",
                 'ajax' => true,
             ];
         });
@@ -270,8 +273,9 @@ class PrettyPageHandlerTest extends TestCase
         $handler->setEditor(function ($file, $line) {
             $file = rawurlencode($file);
             $line = rawurlencode($line);
+
             return [
-                'url' => "http://google.com/search/?q=$file:$line",
+                'url'  => "http://google.com/search/?q=$file:$line",
                 'ajax' => false,
             ];
         });

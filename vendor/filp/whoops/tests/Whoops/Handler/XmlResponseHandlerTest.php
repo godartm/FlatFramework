@@ -27,6 +27,27 @@ class XmlResponseHandlerTest extends TestCase
         return simplexml_load_string($data);
     }
 
+    private function getException()
+    {
+        return new RuntimeException();
+    }
+
+    /**
+     * See if passed string is a valid XML document
+     *
+     * @param  string $data
+     *
+     * @return bool
+     */
+    private function isValidXml($data)
+    {
+        $prev = libxml_use_internal_errors(true);
+        $xml = simplexml_load_string($data);
+        libxml_use_internal_errors($prev);
+
+        return $xml !== false;
+    }
+
     /**
      * @depends testSimpleValid
      */
@@ -36,11 +57,21 @@ class XmlResponseHandlerTest extends TestCase
     }
 
     /**
+     * Helper for testSimpleValid*
+     */
+    private function checkField(\SimpleXMLElement $xml, $field, $value)
+    {
+        $list = $xml->xpath('/root/error/' . $field);
+        $this->assertArrayHasKey(0, $list);
+        $this->assertSame($value, (string)$list[0]);
+    }
+
+    /**
      * @depends testSimpleValid
      */
     public function testSimpleValidLine(\SimpleXMLElement $xml)
     {
-        $this->checkField($xml, 'line', (string) $this->getException()->getLine());
+        $this->checkField($xml, 'line', (string)$this->getException()->getLine());
     }
 
     /**
@@ -49,33 +80,5 @@ class XmlResponseHandlerTest extends TestCase
     public function testSimpleValidType(\SimpleXMLElement $xml)
     {
         $this->checkField($xml, 'type', get_class($this->getException()));
-    }
-
-    /**
-     * Helper for testSimpleValid*
-     */
-    private function checkField(\SimpleXMLElement $xml, $field, $value)
-    {
-        $list = $xml->xpath('/root/error/'.$field);
-        $this->assertArrayHasKey(0, $list);
-        $this->assertSame($value, (string) $list[0]);
-    }
-
-    private function getException()
-    {
-        return new RuntimeException();
-    }
-
-    /**
-     * See if passed string is a valid XML document
-     * @param  string $data
-     * @return bool
-     */
-    private function isValidXml($data)
-    {
-        $prev = libxml_use_internal_errors(true);
-        $xml = simplexml_load_string($data);
-        libxml_use_internal_errors($prev);
-        return $xml !== false;
     }
 }

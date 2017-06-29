@@ -27,26 +27,15 @@ class JsonResponseHandler extends Handler
 
     /**
      * Returns errors[[]] instead of error[] to be in compliance with the json:api spec
+     *
      * @param bool $jsonApi Default is false
+     *
      * @return $this
      */
     public function setJsonApi($jsonApi = false)
     {
-        $this->jsonApi = (bool) $jsonApi;
-        return $this;
-    }
+        $this->jsonApi = (bool)$jsonApi;
 
-    /**
-     * @param  bool|null  $returnFrames
-     * @return bool|$this
-     */
-    public function addTraceToOutput($returnFrames = null)
-    {
-        if (func_num_args() == 0) {
-            return $this->returnFrames;
-        }
-
-        $this->returnFrames = (bool) $returnFrames;
         return $this;
     }
 
@@ -55,27 +44,43 @@ class JsonResponseHandler extends Handler
      */
     public function handle()
     {
-      if ($this->jsonApi === true) {
-        $response = [
-          'errors' => [
-            Formatter::formatExceptionAsDataArray(
-                  $this->getInspector(),
-                  $this->addTraceToOutput()
-            ),
-          ]
-        ];
-      } else {
-        $response = [
-            'error' => Formatter::formatExceptionAsDataArray(
-                $this->getInspector(),
-                $this->addTraceToOutput()
-            ),
-        ];
-      }
+        if ($this->jsonApi === true) {
+            $response = [
+                'errors' => [
+                    Formatter::formatExceptionAsDataArray(
+                        $this->getInspector(),
+                        $this->addTraceToOutput()
+                    ),
+                ]
+            ];
+        } else {
+            $response = [
+                'error' => Formatter::formatExceptionAsDataArray(
+                    $this->getInspector(),
+                    $this->addTraceToOutput()
+                ),
+            ];
+        }
 
         echo json_encode($response, defined('JSON_PARTIAL_OUTPUT_ON_ERROR') ? JSON_PARTIAL_OUTPUT_ON_ERROR : 0);
 
         return Handler::QUIT;
+    }
+
+    /**
+     * @param  bool|null $returnFrames
+     *
+     * @return bool|$this
+     */
+    public function addTraceToOutput($returnFrames = null)
+    {
+        if (func_num_args() == 0) {
+            return $this->returnFrames;
+        }
+
+        $this->returnFrames = (bool)$returnFrames;
+
+        return $this;
     }
 
     /**

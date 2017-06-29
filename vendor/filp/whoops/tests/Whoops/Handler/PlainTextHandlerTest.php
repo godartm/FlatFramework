@@ -13,53 +13,6 @@ use Whoops\TestCase;
 class PlainTextHandlerTest extends TestCase
 {
     /**
-     * @throws InvalidArgumentException        If argument is not null or a LoggerInterface
-     * @param  Psr\Log\LoggerInterface|null    $logger
-     * @return Whoops\Handler\PlainTextHandler
-     */
-    private function getHandler($logger = null)
-    {
-        return new PlainTextHandler($logger);
-    }
-
-    /**
-     * @return RuntimeException
-     */
-    public function getException($message = 'test message')
-    {
-        return new RuntimeException($message);
-    }
-
-    /**
-     * @param  bool  $withTrace
-     * @param  bool  $withTraceArgs
-     * @param  bool  $loggerOnly
-     * @return array
-     */
-    private function getPlainTextFromHandler(
-        $withTrace = false,
-        $withTraceArgs = false,
-        $traceFunctionArgsOutputLimit = 1024,
-        $loggerOnly = false
-    ) {
-        $handler = $this->getHandler();
-        $handler->addTraceToOutput($withTrace);
-        $handler->addTraceFunctionArgsToOutput($withTraceArgs);
-        $handler->setTraceFunctionArgsOutputLimit($traceFunctionArgsOutputLimit);
-        $handler->loggerOnly($loggerOnly);
-
-        $run = $this->getRunInstance();
-        $run->pushHandler($handler);
-        $run->register();
-
-        $exception = $this->getException();
-        ob_start();
-        $run->handleException($exception);
-
-        return ob_get_clean();
-    }
-
-    /**
      * @covers Whoops\Handler\PlainTextHandler::__construct
      * @covers Whoops\Handler\PlainTextHandler::setLogger
      * @expectedException InvalidArgumentException
@@ -68,6 +21,18 @@ class PlainTextHandlerTest extends TestCase
     {
         $logger = new StdClass(); // guaranteed to be invalid!
         $this->getHandler($logger);
+    }
+
+    /**
+     * @throws InvalidArgumentException        If argument is not null or a LoggerInterface
+     *
+     * @param  Psr\Log\LoggerInterface|null $logger
+     *
+     * @return Whoops\Handler\PlainTextHandler
+     */
+    private function getHandler($logger = null)
+    {
+        return new PlainTextHandler($logger);
     }
 
     /**
@@ -215,6 +180,45 @@ class PlainTextHandlerTest extends TestCase
     }
 
     /**
+     * @param  bool $withTrace
+     * @param  bool $withTraceArgs
+     * @param  bool $loggerOnly
+     *
+     * @return array
+     */
+    private function getPlainTextFromHandler(
+        $withTrace = false,
+        $withTraceArgs = false,
+        $traceFunctionArgsOutputLimit = 1024,
+        $loggerOnly = false
+    )
+    {
+        $handler = $this->getHandler();
+        $handler->addTraceToOutput($withTrace);
+        $handler->addTraceFunctionArgsToOutput($withTraceArgs);
+        $handler->setTraceFunctionArgsOutputLimit($traceFunctionArgsOutputLimit);
+        $handler->loggerOnly($loggerOnly);
+
+        $run = $this->getRunInstance();
+        $run->pushHandler($handler);
+        $run->register();
+
+        $exception = $this->getException();
+        ob_start();
+        $run->handleException($exception);
+
+        return ob_get_clean();
+    }
+
+    /**
+     * @return RuntimeException
+     */
+    public function getException($message = 'test message')
+    {
+        return new RuntimeException($message);
+    }
+
+    /**
      * @covers Whoops\Handler\PlainTextHandler::addTraceToOutput
      * @covers Whoops\Handler\PlainTextHandler::getTraceOutput
      * @covers Whoops\Handler\PlainTextHandler::canOutput
@@ -289,7 +293,7 @@ class PlainTextHandlerTest extends TestCase
             PlainTextHandler::VAR_DUMP_PREFIX,
             strlen('test message'),
             'test message'
-            ), $text
+        ), $text
         );
     }
 
@@ -332,7 +336,7 @@ class PlainTextHandlerTest extends TestCase
             PlainTextHandler::VAR_DUMP_PREFIX,
             strlen('test message'),
             'test message'
-            ), $text
+        ), $text
         );
     }
 

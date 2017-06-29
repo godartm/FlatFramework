@@ -20,7 +20,7 @@ class SystemFacade
 
     /**
      * @param callable $handler
-     * @param int      $types
+     * @param int $types
      *
      * @return callable|null
      */
@@ -30,6 +30,7 @@ class SystemFacade
         if ($types === 'use-php-defaults') {
             $types = E_ALL | E_STRICT;
         }
+
         return set_error_handler($handler, $types);
     }
 

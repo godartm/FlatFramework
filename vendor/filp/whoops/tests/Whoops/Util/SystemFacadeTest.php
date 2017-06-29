@@ -20,18 +20,6 @@ class SystemFacadeTest extends \PHPUnit_Framework_TestCase
             : call_user_func_array("\\$fn", $args);
     }
 
-    protected function setUp()
-    {
-        self::$runtime = \Mockery::mock(['ob_start' => true]);
-        $this->facade = new SystemFacade();
-    }
-
-    protected function tearDown()
-    {
-        self::$runtime = null;
-        \Mockery::close();
-    }
-
     public function test_it_delegates_output_buffering_to_the_native_implementation()
     {
         self::$runtime->shouldReceive('ob_start')->once();
@@ -71,21 +59,24 @@ class SystemFacadeTest extends \PHPUnit_Framework_TestCase
     {
         self::$runtime->shouldReceive('set_error_handler')->once();
 
-        $this->facade->setErrorHandler(function(){});
+        $this->facade->setErrorHandler(function () {
+        });
     }
 
     public function test_it_delegates_error_handling_with_level_to_the_native_implementation()
     {
         self::$runtime->shouldReceive('set_error_handler')->once();
 
-        $this->facade->setErrorHandler(function(){}, E_CORE_ERROR);
+        $this->facade->setErrorHandler(function () {
+        }, E_CORE_ERROR);
     }
 
     public function test_it_delegates_exception_handling_to_the_native_implementation()
     {
         self::$runtime->shouldReceive('set_exception_handler')->once();
 
-        $this->facade->setExceptionHandler(function(){});
+        $this->facade->setExceptionHandler(function () {
+        });
     }
 
     public function test_it_delegates_restoring_the_exception_handler_to_the_native_implementation()
@@ -106,7 +97,8 @@ class SystemFacadeTest extends \PHPUnit_Framework_TestCase
     {
         self::$runtime->shouldReceive('register_shutdown_function')->once();
 
-        $this->facade->registerShutdownFunction(function(){});
+        $this->facade->registerShutdownFunction(function () {
+        });
     }
 
     public function test_it_delegates_error_reporting_to_the_native_implementation()
@@ -128,6 +120,18 @@ class SystemFacadeTest extends \PHPUnit_Framework_TestCase
         self::$runtime->shouldReceive('http_response_code')->once()->with(230);
 
         $this->facade->setHttpResponseCode(230);
+    }
+
+    protected function setUp()
+    {
+        self::$runtime = \Mockery::mock(['ob_start' => true]);
+        $this->facade = new SystemFacade();
+    }
+
+    protected function tearDown()
+    {
+        self::$runtime = null;
+        \Mockery::close();
     }
 }
 
@@ -162,6 +166,7 @@ function set_error_handler(callable $handler, $types = 'use-php-defaults')
     if ($types === 'use-php-defaults') {
         $types = E_ALL | E_STRICT;
     }
+
     return SystemFacadeTest::delegate('set_error_handler', func_get_args());
 }
 

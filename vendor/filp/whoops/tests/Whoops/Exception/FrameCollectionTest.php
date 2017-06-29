@@ -18,37 +18,17 @@ class FrameCollectionTest extends TestCase
     private $frameIdCounter = 0;
 
     /**
-     * @return array
+     * @covers Whoops\Exception\FrameCollection::offsetExists
      */
-    public function getFrameData()
+    public function testArrayAccessExists()
     {
-        $id = ++$this->frameIdCounter;
-        return [
-            'file'     => __DIR__ . '/../../fixtures/frame.lines-test.php',
-            'line'     => $id,
-            'function' => 'test-' . $id,
-            'class'    => 'MyClass',
-            'args'     => [true, 'hello'],
-        ];
+        $collection = $this->getFrameCollectionInstance();
+        $this->assertTrue(isset($collection[0]));
     }
 
     /**
-     * @param  int   $total
-     * @return array
-     */
-    public function getFrameDataList($total)
-    {
-        $total = max((int) $total, 1);
-        $self  = $this;
-        $frames = array_map(function () use ($self) {
-            return $self->getFrameData();
-        }, range(1, $total));
-
-        return $frames;
-    }
-
-    /**
-     * @param  array                            $frames
+     * @param  array $frames
+     *
      * @return Whoops\Exception\FrameCollection
      */
     private function getFrameCollectionInstance($frames = null)
@@ -61,12 +41,35 @@ class FrameCollectionTest extends TestCase
     }
 
     /**
-     * @covers Whoops\Exception\FrameCollection::offsetExists
+     * @param  int $total
+     *
+     * @return array
      */
-    public function testArrayAccessExists()
+    public function getFrameDataList($total)
     {
-        $collection = $this->getFrameCollectionInstance();
-        $this->assertTrue(isset($collection[0]));
+        $total = max((int)$total, 1);
+        $self = $this;
+        $frames = array_map(function () use ($self) {
+            return $self->getFrameData();
+        }, range(1, $total));
+
+        return $frames;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFrameData()
+    {
+        $id = ++$this->frameIdCounter;
+
+        return [
+            'file'     => __DIR__ . '/../../fixtures/frame.lines-test.php',
+            'line'     => $id,
+            'function' => 'test-' . $id,
+            'class'    => 'MyClass',
+            'args'     => [true, 'hello'],
+        ];
     }
 
     /**
@@ -124,6 +127,7 @@ class FrameCollectionTest extends TestCase
         // Filter out all frames with a line number under 6
         $frames->map(function ($frame) {
             $frame->addComment("This is cool", "test");
+
             return $frame;
         });
 
@@ -187,9 +191,9 @@ class FrameCollectionTest extends TestCase
      */
     public function testCollectionIsSerializable()
     {
-        $frames           = $this->getFrameCollectionInstance();
+        $frames = $this->getFrameCollectionInstance();
         $serializedFrames = serialize($frames);
-        $newFrames        = unserialize($serializedFrames);
+        $newFrames = unserialize($serializedFrames);
 
         foreach ($newFrames as $frame) {
             $this->assertInstanceOf('Whoops\\Exception\\Frame', $frame);

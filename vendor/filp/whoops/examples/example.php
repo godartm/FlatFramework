@@ -26,20 +26,20 @@ class Exception extends BaseException
 {
 }
 
-$run     = new Run();
+$run = new Run();
 $handler = new PrettyPageHandler();
 
 // Add a custom table to the layout:
 $handler->addDataTable('Ice-cream I like', [
-    'Chocolate' => 'yes',
-    'Coffee & chocolate' => 'a lot',
+    'Chocolate'              => 'yes',
+    'Coffee & chocolate'     => 'a lot',
     'Strawberry & chocolate' => 'it\'s alright',
-    'Vanilla' => 'ew',
+    'Vanilla'                => 'ew',
 ]);
 
 $handler->setApplicationPaths([__FILE__]);
 
-$handler->addDataTableCallback('Details', function(\Whoops\Exception\Inspector $inspector) {
+$handler->addDataTableCallback('Details', function (\Whoops\Exception\Inspector $inspector) {
     $data = array();
     $exception = $inspector->getException();
     if ($exception instanceof SomeSpecificException) {
@@ -47,6 +47,7 @@ $handler->addDataTableCallback('Details', function(\Whoops\Exception\Inspector $
     }
     $data['Exception class'] = get_class($exception);
     $data['Exception code'] = $exception->getCode();
+
     return $data;
 });
 
@@ -75,7 +76,7 @@ function fooBar()
 
 function bar()
 {
-    whoops_add_stack_frame(function(){
+    whoops_add_stack_frame(function () {
         fooBar();
     });
 }

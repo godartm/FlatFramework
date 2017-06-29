@@ -24,7 +24,7 @@ class Autoloader
         if (0 !== strpos($class, 'Xiaoler\Blade')) {
             return;
         }
-        if (is_file($file = dirname(__FILE__). '/' . str_replace('\\', '/', substr($class, 13)) . '.php')) {
+        if (is_file($file = dirname(__FILE__) . '/' . str_replace('\\', '/', substr($class, 13)) . '.php')) {
             require $file;
         }
     }

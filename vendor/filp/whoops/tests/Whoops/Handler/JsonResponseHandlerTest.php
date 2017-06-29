@@ -12,23 +12,31 @@ use Whoops\TestCase;
 class JsonResponseHandlerTest extends TestCase
 {
     /**
-     * @return Whoops\Handler\JsonResponseHandler
+     * @covers Whoops\Handler\JsonResponseHandler::addTraceToOutput
+     * @covers Whoops\Handler\JsonResponseHandler::handle
      */
-    private function getHandler()
+    public function testReturnsWithoutFrames()
     {
-        return new JsonResponseHandler();
+        $json = $this->getJsonResponseFromHandler($withTrace = false, $jsonApi = false);
+
+        // Check that the response has the expected keys:
+        $this->assertArrayHasKey('error', $json);
+        $this->assertArrayHasKey('type', $json['error']);
+        $this->assertArrayHasKey('file', $json['error']);
+        $this->assertArrayHasKey('line', $json['error']);
+
+        // Check the field values:
+        $this->assertEquals($json['error']['file'], __FILE__);
+        $this->assertEquals($json['error']['message'], 'test message');
+        $this->assertEquals($json['error']['type'], get_class($this->getException()));
+
+        // Check that the trace is NOT returned:
+        $this->assertArrayNotHasKey('trace', $json['error']);
     }
 
     /**
-     * @return RuntimeException
-     */
-    public function getException($message = 'test message')
-    {
-        return new RuntimeException($message);
-    }
-
-    /**
-     * @param  bool  $withTrace
+     * @param  bool $withTrace
+     *
      * @return array
      */
     private function getJsonResponseFromHandler($withTrace = false, $jsonApi = false)
@@ -53,26 +61,19 @@ class JsonResponseHandlerTest extends TestCase
     }
 
     /**
-     * @covers Whoops\Handler\JsonResponseHandler::addTraceToOutput
-     * @covers Whoops\Handler\JsonResponseHandler::handle
+     * @return Whoops\Handler\JsonResponseHandler
      */
-    public function testReturnsWithoutFrames()
+    private function getHandler()
     {
-        $json = $this->getJsonResponseFromHandler($withTrace = false,$jsonApi = false);
+        return new JsonResponseHandler();
+    }
 
-        // Check that the response has the expected keys:
-        $this->assertArrayHasKey('error', $json);
-        $this->assertArrayHasKey('type', $json['error']);
-        $this->assertArrayHasKey('file', $json['error']);
-        $this->assertArrayHasKey('line', $json['error']);
-
-        // Check the field values:
-        $this->assertEquals($json['error']['file'], __FILE__);
-        $this->assertEquals($json['error']['message'], 'test message');
-        $this->assertEquals($json['error']['type'], get_class($this->getException()));
-
-        // Check that the trace is NOT returned:
-        $this->assertArrayNotHasKey('trace', $json['error']);
+    /**
+     * @return RuntimeException
+     */
+    public function getException($message = 'test message')
+    {
+        return new RuntimeException($message);
     }
 
     /**
@@ -81,7 +82,7 @@ class JsonResponseHandlerTest extends TestCase
      */
     public function testReturnsWithFrames()
     {
-        $json = $this->getJsonResponseFromHandler($withTrace = true,$jsonApi = false);
+        $json = $this->getJsonResponseFromHandler($withTrace = true, $jsonApi = false);
 
         // Check that the trace is returned:
         $this->assertArrayHasKey('trace', $json['error']);
@@ -101,7 +102,7 @@ class JsonResponseHandlerTest extends TestCase
      */
     public function testReturnsJsonApi()
     {
-        $json = $this->getJsonResponseFromHandler($withTrace = false,$jsonApi = true);
+        $json = $this->getJsonResponseFromHandler($withTrace = false, $jsonApi = true);
 
         // Check that the response has the expected keys:
         $this->assertArrayHasKey('errors', $json);
@@ -118,5 +119,5 @@ class JsonResponseHandlerTest extends TestCase
         $this->assertArrayNotHasKey('trace', $json['errors']);
     }
 
- 
+
 }

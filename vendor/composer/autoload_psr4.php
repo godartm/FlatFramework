@@ -6,8 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Xiaoler\\Blade\\' => array($vendorDir . '/xiaoler/blade/src'),
-    'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Xiaoler\\Blade\\'      => array($vendorDir . '/xiaoler/blade/src'),
+    'Whoops\\'              => array($vendorDir . '/filp/whoops/src/Whoops'),
+    'Psr\\Log\\'            => array($vendorDir . '/psr/log/Psr/Log'),
     'PrivateHeberg\\Flat\\' => array($vendorDir . '/privateheberg/flat'),
 );

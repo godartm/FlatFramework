@@ -17,19 +17,22 @@ interface HandlerInterface
     public function handle();
 
     /**
-     * @param  RunInterface  $run
+     * @param  RunInterface $run
+     *
      * @return void
      */
     public function setRun(RunInterface $run);
 
     /**
      * @param  \Throwable $exception
+     *
      * @return void
      */
     public function setException($exception);
 
     /**
      * @param  Inspector $inspector
+     *
      * @return void
      */
     public function setInspector(Inspector $inspector);

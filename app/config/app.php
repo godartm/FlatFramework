@@ -13,16 +13,16 @@ $_CONFIG = [
     ],
     'firewallDefaultPolicy' => FIREWALLPOLICY::REJECT,
     'dirs'                  => [
-        'router'      => [
+        'router'          => [
             __DIR__ . '/routing.php'
         ],
-        'static_template'    => __DIR__ . '/../../resource/static_view',
+        'static_template' => __DIR__ . '/../../resource/static_view',
         'dyn_template'    => __DIR__ . '/../../resource/dyn_view',
-        'tmp'         => __DIR__ . '/../tmp',
-        'trans'       => __DIR__ . '/../trans',
-        'replace'     => __DIR__ . '/../replacer',
-        'permissions' => __DIR__ . '/../permissions',
-        'global'      => __DIR__ . '/../config/global.php'
+        'tmp'             => __DIR__ . '/../tmp',
+        'trans'           => __DIR__ . '/../trans',
+        'replace'         => __DIR__ . '/../replacer',
+        'permissions'     => __DIR__ . '/../permissions',
+        'global'          => __DIR__ . '/../config/global.php'
     ],
     'database'              => [
         [

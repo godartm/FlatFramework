@@ -9,7 +9,8 @@ use PrivateHeberg\Flat\Controller;
  */
 class HomeController extends Controller
 {
-    public function defaultAction() {
+    public function defaultAction()
+    {
 
     }
 }

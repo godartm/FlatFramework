@@ -12,8 +12,9 @@ class MiscTest extends TestCase
 {
     /**
      * @dataProvider provideTranslateException
+     *
      * @param string $expected_output
-     * @param int    $exception_code
+     * @param int $exception_code
      */
     public function testTranslateException($expected_output, $exception_code)
     {

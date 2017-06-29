@@ -18,10 +18,10 @@ abstract class Handler implements HandlerInterface
      * Return constants that can be returned from Handler::handle
      * to message the handler walker.
      */
-    const DONE         = 0x10; // returning this is optional, only exists for
-                               // semantic purposes
+    const DONE = 0x10; // returning this is optional, only exists for
+    // semantic purposes
     const LAST_HANDLER = 0x20;
-    const QUIT         = 0x30;
+    const QUIT = 0x30;
 
     /**
      * @var RunInterface
@@ -39,14 +39,6 @@ abstract class Handler implements HandlerInterface
     private $exception;
 
     /**
-     * @param RunInterface $run
-     */
-    public function setRun(RunInterface $run)
-    {
-        $this->run = $run;
-    }
-
-    /**
      * @return RunInterface
      */
     protected function getRun()
@@ -55,11 +47,11 @@ abstract class Handler implements HandlerInterface
     }
 
     /**
-     * @param Inspector $inspector
+     * @param RunInterface $run
      */
-    public function setInspector(Inspector $inspector)
+    public function setRun(RunInterface $run)
     {
-        $this->inspector = $inspector;
+        $this->run = $run;
     }
 
     /**
@@ -71,11 +63,11 @@ abstract class Handler implements HandlerInterface
     }
 
     /**
-     * @param \Throwable $exception
+     * @param Inspector $inspector
      */
-    public function setException($exception)
+    public function setInspector(Inspector $inspector)
     {
-        $this->exception = $exception;
+        $this->inspector = $inspector;
     }
 
     /**
@@ -84,5 +76,13 @@ abstract class Handler implements HandlerInterface
     protected function getException()
     {
         return $this->exception;
+    }
+
+    /**
+     * @param \Throwable $exception
+     */
+    public function setException($exception)
+    {
+        $this->exception = $exception;
     }
 }

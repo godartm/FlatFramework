@@ -23,33 +23,41 @@ class  EventListener
 {
     /**
      * On page Load
+     *
      * @param FinishLoadEvent $e
      */
-    public function onFinishLoader(FinishLoadEvent $e) {
+    public function onFinishLoader(FinishLoadEvent $e)
+    {
         //IT'S A VIRTUAL METHOD
     }
 
     /**
      * On User Get indo action
+     *
      * @param FinishLoadEvent $e
      */
-    public function onGetUserInfo(GetUserInfoEvent $e) {
+    public function onGetUserInfo(GetUserInfoEvent $e)
+    {
         //IT'S A VIRTUAL METHOD
     }
 
     /**
      * On get global updater
+     *
      * @param FinishLoadEvent $e
      */
-    public function onGetGlobalUpdater(GetGlobalUpdaterEvent $e) {
+    public function onGetGlobalUpdater(GetGlobalUpdaterEvent $e)
+    {
         //IT'S A VIRTUAL METHOD
     }
 
     /**
      * On Error
+     *
      * @param FinishLoadEvent $e
      */
-    public function onViolation(ViolationEvent $e) {
+    public function onViolation(ViolationEvent $e)
+    {
         //IT'S A VIRTUAL METHOD
     }
 

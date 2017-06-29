@@ -13,10 +13,31 @@ use Psr\Log\LogLevel;
  */
 abstract class LoggerInterfaceTest extends \PHPUnit_Framework_TestCase
 {
+    public function testImplements()
+    {
+        $this->assertInstanceOf('Psr\Log\LoggerInterface', $this->getLogger());
+    }
+
     /**
      * @return LoggerInterface
      */
     abstract public function getLogger();
+
+    /**
+     * @dataProvider provideLevelsAndMessages
+     */
+    public function testLogsAtAllLevels($level, $message)
+    {
+        $logger = $this->getLogger();
+        $logger->{$level}($message, array('user' => 'Bob'));
+        $logger->log($level, $message, array('user' => 'Bob'));
+
+        $expected = array(
+            $level . ' message of level ' . $level . ' with context: Bob',
+            $level . ' message of level ' . $level . ' with context: Bob',
+        );
+        $this->assertEquals($expected, $this->getLogs());
+    }
 
     /**
      * This must return the log messages in order.
@@ -29,38 +50,17 @@ abstract class LoggerInterfaceTest extends \PHPUnit_Framework_TestCase
      */
     abstract public function getLogs();
 
-    public function testImplements()
-    {
-        $this->assertInstanceOf('Psr\Log\LoggerInterface', $this->getLogger());
-    }
-
-    /**
-     * @dataProvider provideLevelsAndMessages
-     */
-    public function testLogsAtAllLevels($level, $message)
-    {
-        $logger = $this->getLogger();
-        $logger->{$level}($message, array('user' => 'Bob'));
-        $logger->log($level, $message, array('user' => 'Bob'));
-
-        $expected = array(
-            $level.' message of level '.$level.' with context: Bob',
-            $level.' message of level '.$level.' with context: Bob',
-        );
-        $this->assertEquals($expected, $this->getLogs());
-    }
-
     public function provideLevelsAndMessages()
     {
         return array(
             LogLevel::EMERGENCY => array(LogLevel::EMERGENCY, 'message of level emergency with context: {user}'),
-            LogLevel::ALERT => array(LogLevel::ALERT, 'message of level alert with context: {user}'),
-            LogLevel::CRITICAL => array(LogLevel::CRITICAL, 'message of level critical with context: {user}'),
-            LogLevel::ERROR => array(LogLevel::ERROR, 'message of level error with context: {user}'),
-            LogLevel::WARNING => array(LogLevel::WARNING, 'message of level warning with context: {user}'),
-            LogLevel::NOTICE => array(LogLevel::NOTICE, 'message of level notice with context: {user}'),
-            LogLevel::INFO => array(LogLevel::INFO, 'message of level info with context: {user}'),
-            LogLevel::DEBUG => array(LogLevel::DEBUG, 'message of level debug with context: {user}'),
+            LogLevel::ALERT     => array(LogLevel::ALERT, 'message of level alert with context: {user}'),
+            LogLevel::CRITICAL  => array(LogLevel::CRITICAL, 'message of level critical with context: {user}'),
+            LogLevel::ERROR     => array(LogLevel::ERROR, 'message of level error with context: {user}'),
+            LogLevel::WARNING   => array(LogLevel::WARNING, 'message of level warning with context: {user}'),
+            LogLevel::NOTICE    => array(LogLevel::NOTICE, 'message of level notice with context: {user}'),
+            LogLevel::INFO      => array(LogLevel::INFO, 'message of level info with context: {user}'),
+            LogLevel::DEBUG     => array(LogLevel::DEBUG, 'message of level debug with context: {user}'),
         );
     }
 
@@ -102,13 +102,13 @@ abstract class LoggerInterfaceTest extends \PHPUnit_Framework_TestCase
     public function testContextCanContainAnything()
     {
         $context = array(
-            'bool' => true,
-            'null' => null,
-            'string' => 'Foo',
-            'int' => 0,
-            'float' => 0.5,
-            'nested' => array('with object' => new DummyTest),
-            'object' => new \DateTime,
+            'bool'     => true,
+            'null'     => null,
+            'string'   => 'Foo',
+            'int'      => 0,
+            'float'    => 0.5,
+            'nested'   => array('with object' => new DummyTest),
+            'object'   => new \DateTime,
             'resource' => fopen('php://memory', 'r'),
         );
 

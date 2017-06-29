@@ -75,7 +75,9 @@ class Cryptographie
 
     /**
      * Check if CSRF is valid
+     *
      * @param $string
+     *
      * @return bool
      */
     public function csrfCheck($string)

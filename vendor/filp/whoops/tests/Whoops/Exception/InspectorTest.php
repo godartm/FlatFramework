@@ -12,26 +12,6 @@ use Whoops\TestCase;
 class InspectorTest extends TestCase
 {
     /**
-     * @param  string     $message
-     * @param  int        $code
-     * @param  Exception $previous
-     * @return Exception
-     */
-    protected function getException($message = null, $code = 0, $previous = null)
-    {
-        return new Exception($message, $code, $previous);
-    }
-
-    /**
-     * @param  Exception                  $exception|null
-     * @return Whoops\Exception\Inspector
-     */
-    protected function getInspectorInstance($exception = null)
-    {
-        return new Inspector($exception);
-    }
-
-    /**
      * @covers Whoops\Exception\Inspector::getFrames
      */
     public function testCorrectNestedFrames($value = '')
@@ -45,13 +25,35 @@ class InspectorTest extends TestCase
     }
 
     /**
+     * @param  string $message
+     * @param  int $code
+     * @param  Exception $previous
+     *
+     * @return Exception
+     */
+    protected function getException($message = null, $code = 0, $previous = null)
+    {
+        return new Exception($message, $code, $previous);
+    }
+
+    /**
+     * @param  Exception $exception |null
+     *
+     * @return Whoops\Exception\Inspector
+     */
+    protected function getInspectorInstance($exception = null)
+    {
+        return new Inspector($exception);
+    }
+
+    /**
      * @covers Whoops\Exception\Inspector::getFrames
      */
     public function testDoesNotFailOnPHP7ErrorObject()
     {
         if (!class_exists('Error')) {
             $this->markTestSkipped(
-              'PHP 5.x, the Error class is not available.'
+                'PHP 5.x, the Error class is not available.'
             );
         }
 
@@ -61,6 +63,7 @@ class InspectorTest extends TestCase
         $frames = $inspector->getFrames();
         $this->assertSame($outer->getLine(), $frames[0]->getLine());
     }
+
     /**
      * @covers Whoops\Exception\Inspector::getExceptionName
      */
@@ -102,8 +105,8 @@ class InspectorTest extends TestCase
     public function testPreviousException()
     {
         $previousException = $this->getException("I'm here first!");
-        $exception         = $this->getException("Oh boy", null, $previousException);
-        $inspector         = $this->getInspectorInstance($exception);
+        $exception = $this->getException("Oh boy", null, $previousException);
+        $inspector = $this->getInspectorInstance($exception);
 
         $this->assertTrue($inspector->hasPreviousException());
         $this->assertEquals($previousException, $inspector->getPreviousExceptionInspector()->getException());
@@ -114,8 +117,8 @@ class InspectorTest extends TestCase
      */
     public function testNegativeHasPreviousException()
     {
-        $exception         = $this->getException("Oh boy");
-        $inspector         = $this->getInspectorInstance($exception);
+        $exception = $this->getException("Oh boy");
+        $inspector = $this->getInspectorInstance($exception);
 
         $this->assertFalse($inspector->hasPreviousException());
     }

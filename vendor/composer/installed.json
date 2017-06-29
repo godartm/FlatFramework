@@ -1,197 +1,197 @@
 [
-    {
-        "name": "xiaoler/blade",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/XiaoLer/blade.git",
-            "reference": "a3fe5dc53d0110cb1810c7ba887a90308f09cff7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/XiaoLer/blade/zipball/a3fe5dc53d0110cb1810c7ba887a90308f09cff7",
-            "reference": "a3fe5dc53d0110cb1810c7ba887a90308f09cff7",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0"
-        },
-        "time": "2016-12-18T03:52:13+00:00",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "files": [
-                "src/helpers.php"
-            ],
-            "psr-4": {
-                "Xiaoler\\Blade\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Scholer Liu",
-                "email": "scholer_l@live.com"
-            }
-        ],
-        "description": "an independent version of laravel view template - blade",
-        "homepage": "http://0x1.im"
+  {
+    "name": "xiaoler/blade",
+    "version": "dev-master",
+    "version_normalized": "9999999-dev",
+    "source": {
+      "type": "git",
+      "url": "https://github.com/XiaoLer/blade.git",
+      "reference": "a3fe5dc53d0110cb1810c7ba887a90308f09cff7"
     },
-    {
-        "name": "vrana/notorm",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/vrana/notorm.git",
-            "reference": "e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/vrana/notorm/zipball/e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd",
-            "reference": "e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd",
-            "shasum": ""
-        },
-        "time": "2014-10-30T16:55:08+00:00",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "files": [
-                "NotORM.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0",
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "Jakub Vrana",
-                "homepage": "http://www.vrana.cz/"
-            }
-        ],
-        "description": "NotORM is a PHP library for simple working with data in the database.",
-        "homepage": "http://www.notorm.com/",
-        "keywords": [
-            "database",
-            "dbal"
-        ]
+    "dist": {
+      "type": "zip",
+      "url": "https://api.github.com/repos/XiaoLer/blade/zipball/a3fe5dc53d0110cb1810c7ba887a90308f09cff7",
+      "reference": "a3fe5dc53d0110cb1810c7ba887a90308f09cff7",
+      "shasum": ""
     },
-    {
-        "name": "psr/log",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/log.git",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2016-10-10T12:19:37+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Psr\\Log\\": "Psr/Log/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interface for logging libraries",
-        "homepage": "https://github.com/php-fig/log",
-        "keywords": [
-            "log",
-            "psr",
-            "psr-3"
-        ]
+    "require": {
+      "php": ">=5.4.0"
     },
-    {
-        "name": "filp/whoops",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/filp/whoops.git",
-            "reference": "b238974e1c7cc1859b0c16ddc1c02ecb70ecc07f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/filp/whoops/zipball/b238974e1c7cc1859b0c16ddc1c02ecb70ecc07f",
-            "reference": "b238974e1c7cc1859b0c16ddc1c02ecb70ecc07f",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5.9 || ^7.0",
-            "psr/log": "^1.0.1"
-        },
-        "require-dev": {
-            "mockery/mockery": "0.9.*",
-            "phpunit/phpunit": "^4.8 || ^5.0",
-            "symfony/var-dumper": "^2.6 || ^3.0"
-        },
-        "suggest": {
-            "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
-            "whoops/soap": "Formats errors as SOAP responses"
-        },
-        "time": "2017-06-03T18:33:07+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "Whoops\\": "src/Whoops/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Filipe Dobreira",
-                "homepage": "https://github.com/filp",
-                "role": "Developer"
-            }
-        ],
-        "description": "php error handling for cool kids",
-        "homepage": "https://filp.github.io/whoops/",
-        "keywords": [
-            "error",
-            "exception",
-            "handling",
-            "library",
-            "whoops",
-            "zf2"
-        ]
-    }
+    "time": "2016-12-18T03:52:13+00:00",
+    "type": "library",
+    "installation-source": "source",
+    "autoload": {
+      "files": [
+        "src/helpers.php"
+      ],
+      "psr-4": {
+        "Xiaoler\\Blade\\": "src/"
+      }
+    },
+    "notification-url": "https://packagist.org/downloads/",
+    "license": [
+      "MIT"
+    ],
+    "authors": [
+      {
+        "name": "Scholer Liu",
+        "email": "scholer_l@live.com"
+      }
+    ],
+    "description": "an independent version of laravel view template - blade",
+    "homepage": "http://0x1.im"
+  },
+  {
+    "name": "vrana/notorm",
+    "version": "dev-master",
+    "version_normalized": "9999999-dev",
+    "source": {
+      "type": "git",
+      "url": "https://github.com/vrana/notorm.git",
+      "reference": "e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd"
+    },
+    "dist": {
+      "type": "zip",
+      "url": "https://api.github.com/repos/vrana/notorm/zipball/e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd",
+      "reference": "e49d5d2f1bfe440dc82b61f46172635dfcb6f6dd",
+      "shasum": ""
+    },
+    "time": "2014-10-30T16:55:08+00:00",
+    "type": "library",
+    "installation-source": "source",
+    "autoload": {
+      "files": [
+        "NotORM.php"
+      ]
+    },
+    "notification-url": "https://packagist.org/downloads/",
+    "license": [
+      "Apache-2.0",
+      "GPL-2.0+"
+    ],
+    "authors": [
+      {
+        "name": "Jakub Vrana",
+        "homepage": "http://www.vrana.cz/"
+      }
+    ],
+    "description": "NotORM is a PHP library for simple working with data in the database.",
+    "homepage": "http://www.notorm.com/",
+    "keywords": [
+      "database",
+      "dbal"
+    ]
+  },
+  {
+    "name": "psr/log",
+    "version": "1.0.2",
+    "version_normalized": "1.0.2.0",
+    "source": {
+      "type": "git",
+      "url": "https://github.com/php-fig/log.git",
+      "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+    },
+    "dist": {
+      "type": "zip",
+      "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+      "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+      "shasum": ""
+    },
+    "require": {
+      "php": ">=5.3.0"
+    },
+    "time": "2016-10-10T12:19:37+00:00",
+    "type": "library",
+    "extra": {
+      "branch-alias": {
+        "dev-master": "1.0.x-dev"
+      }
+    },
+    "installation-source": "dist",
+    "autoload": {
+      "psr-4": {
+        "Psr\\Log\\": "Psr/Log/"
+      }
+    },
+    "notification-url": "https://packagist.org/downloads/",
+    "license": [
+      "MIT"
+    ],
+    "authors": [
+      {
+        "name": "PHP-FIG",
+        "homepage": "http://www.php-fig.org/"
+      }
+    ],
+    "description": "Common interface for logging libraries",
+    "homepage": "https://github.com/php-fig/log",
+    "keywords": [
+      "log",
+      "psr",
+      "psr-3"
+    ]
+  },
+  {
+    "name": "filp/whoops",
+    "version": "dev-master",
+    "version_normalized": "9999999-dev",
+    "source": {
+      "type": "git",
+      "url": "https://github.com/filp/whoops.git",
+      "reference": "b238974e1c7cc1859b0c16ddc1c02ecb70ecc07f"
+    },
+    "dist": {
+      "type": "zip",
+      "url": "https://api.github.com/repos/filp/whoops/zipball/b238974e1c7cc1859b0c16ddc1c02ecb70ecc07f",
+      "reference": "b238974e1c7cc1859b0c16ddc1c02ecb70ecc07f",
+      "shasum": ""
+    },
+    "require": {
+      "php": "^5.5.9 || ^7.0",
+      "psr/log": "^1.0.1"
+    },
+    "require-dev": {
+      "mockery/mockery": "0.9.*",
+      "phpunit/phpunit": "^4.8 || ^5.0",
+      "symfony/var-dumper": "^2.6 || ^3.0"
+    },
+    "suggest": {
+      "symfony/var-dumper": "Pretty print complex values better with var-dumper available",
+      "whoops/soap": "Formats errors as SOAP responses"
+    },
+    "time": "2017-06-03T18:33:07+00:00",
+    "type": "library",
+    "extra": {
+      "branch-alias": {
+        "dev-master": "2.0-dev"
+      }
+    },
+    "installation-source": "source",
+    "autoload": {
+      "psr-4": {
+        "Whoops\\": "src/Whoops/"
+      }
+    },
+    "notification-url": "https://packagist.org/downloads/",
+    "license": [
+      "MIT"
+    ],
+    "authors": [
+      {
+        "name": "Filipe Dobreira",
+        "homepage": "https://github.com/filp",
+        "role": "Developer"
+      }
+    ],
+    "description": "php error handling for cool kids",
+    "homepage": "https://filp.github.io/whoops/",
+    "keywords": [
+      "error",
+      "exception",
+      "handling",
+      "library",
+      "whoops",
+      "zf2"
+    ]
+  }
 ]

@@ -9,7 +9,8 @@ class Filesystem
     /**
      * Determine if a file exists.
      *
-     * @param  string  $path
+     * @param  string $path
+     *
      * @return bool
      */
     public function exists($path)
@@ -20,7 +21,8 @@ class Filesystem
     /**
      * Get the contents of a file.
      *
-     * @param  string  $path
+     * @param  string $path
+     *
      * @return string
      *
      * @throws Exception
@@ -37,7 +39,8 @@ class Filesystem
     /**
      * Determine if the given path is a file.
      *
-     * @param  string  $file
+     * @param  string $file
+     *
      * @return bool
      */
     public function isFile($file)
@@ -48,9 +51,10 @@ class Filesystem
     /**
      * Write the contents of a file.
      *
-     * @param  string  $path
-     * @param  string  $contents
-     * @param  bool  $lock
+     * @param  string $path
+     * @param  string $contents
+     * @param  bool $lock
+     *
      * @return int
      */
     public function put($path, $contents, $lock = false)
@@ -61,7 +65,8 @@ class Filesystem
     /**
      * Get the file's last modification time.
      *
-     * @param  string  $path
+     * @param  string $path
+     *
      * @return int
      */
     public function lastModified($path)

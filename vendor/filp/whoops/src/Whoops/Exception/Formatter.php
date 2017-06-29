@@ -12,8 +12,10 @@ class Formatter
     /**
      * Returns all basic information about the exception in a simple array
      * for further convertion to other languages
+     *
      * @param  Inspector $inspector
-     * @param  bool      $shouldAddTrace
+     * @param  bool $shouldAddTrace
+     *
      * @return array
      */
     public static function formatExceptionAsDataArray(Inspector $inspector, $shouldAddTrace)
@@ -27,7 +29,7 @@ class Formatter
         ];
 
         if ($shouldAddTrace) {
-            $frames    = $inspector->getFrames();
+            $frames = $inspector->getFrames();
             $frameData = [];
 
             foreach ($frames as $frame) {
@@ -55,18 +57,18 @@ class Formatter
         $plain = $inspector->getExceptionName();
         $plain .= ' thrown with message "';
         $plain .= $message;
-        $plain .= '"'."\n\n";
+        $plain .= '"' . "\n\n";
 
         $plain .= "Stacktrace:\n";
         foreach ($frames as $i => $frame) {
-            $plain .= "#". (count($frames) - $i - 1). " ";
+            $plain .= "#" . (count($frames) - $i - 1) . " ";
             $plain .= $frame->getClass() ?: '';
             $plain .= $frame->getClass() && $frame->getFunction() ? ":" : "";
             $plain .= $frame->getFunction() ?: '';
             $plain .= ' in ';
             $plain .= ($frame->getFile() ?: '<#unknown>');
             $plain .= ':';
-            $plain .= (int) $frame->getLine(). "\n";
+            $plain .= (int)$frame->getLine() . "\n";
         }
 
         return $plain;

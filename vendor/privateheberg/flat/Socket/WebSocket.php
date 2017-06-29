@@ -55,7 +55,7 @@ abstract class WebSocket
         fwrite(STDERR, $msg . "\n");
     } // Called immediately when the data is recieved.
 
-        /**
+    /**
      * Main processing loop
      */
     public function run()
@@ -123,7 +123,7 @@ abstract class WebSocket
         }
     } // Called immediately when the data is recieved.
 
-        protected function _tick()
+    protected function _tick()
     {
         // Core maintenance processes, such as retrying failed messages.
         foreach ($this->heldMessages as $key => $hm) {
@@ -144,7 +144,7 @@ abstract class WebSocket
         }
     } // Called immediately when the data is recieved.
 
-        /**
+    /**
      * Send un packet sur le socket
      *
      * @param $user
@@ -163,7 +163,7 @@ abstract class WebSocket
         }
     } // Called immediately when the data is recieved.
 
-        protected function frame($message, $user, $messageType = 'text', $messageContinues = false)
+    protected function frame($message, $user, $messageType = 'text', $messageContinues = false)
     {
         switch ($messageType) {
             case 'continuous':
@@ -227,7 +227,7 @@ abstract class WebSocket
         return chr($b1) . chr($b2) . $lengthField . $message;
     }        // Called after the handshake response is sent to the client.
 
-            protected function tick()
+    protected function tick()
     {
         // Override this for any process that should happen periodically.  Will happen at least once
         // per second, but possibly more often.
@@ -297,7 +297,7 @@ abstract class WebSocket
         }
     }
 
-abstract protected function closed(WebSocketUser $user);
+    abstract protected function closed(WebSocketUser $user);
 
     public function logError($msg)
     {
@@ -415,7 +415,7 @@ abstract protected function closed(WebSocketUser $user);
         return ""; // return either "Sec-WebSocket-Extensions: SelectedExtensions\r\n" or return an empty string.
     }
 
-abstract protected function connected(WebSocketUser $user);
+    abstract protected function connected(WebSocketUser $user);
 
     protected function split_packet($length, $packet, $user)
     {
@@ -444,42 +444,41 @@ abstract protected function connected(WebSocketUser $user);
 
                         try {
                             $message_decode = $message;
-                        if($this->isJson($message_decode)) {
+                            if ($this->isJson($message_decode)) {
 
 
+                                $obj_packet = new BasePacket();
 
-                            $obj_packet = new BasePacket();
+                                $packet_array = json_decode($message_decode, true);
+                                if ($obj_packet->deserialize($packet_array) != null) {
+                                    $timings = microtime(true);
+                                    $env = new Environement($user, $obj_packet);
 
-                            $packet_array = json_decode($message_decode, true);
-                            if ($obj_packet->deserialize($packet_array) != null) {
-                                $timings = microtime(true);
-                                $env = new Environement($user, $obj_packet);
+                                    if ($obj_packet->type == "UPDATE") {
+                                        $this->onUpdate($user, $obj_packet);
+                                    } elseif ($obj_packet->type == "LOAD") {
+                                        $this->onLoad($user, $obj_packet);
+                                    } elseif ($obj_packet->type == "GET") {
+                                        $this->onGet($user, $obj_packet);
+                                    } elseif ($obj_packet->type == "POST") {
+                                        $this->onPost($user, $obj_packet);
+                                    } else {
+                                        $this->logError($message_decode);
 
-                                if ($obj_packet->type == "UPDATE") {
-                                    $this->onUpdate($user, $obj_packet);
-                                } elseif ($obj_packet->type == "LOAD") {
-                                    $this->onLoad($user, $obj_packet);
-                                } elseif ($obj_packet->type == "GET") {
-                                    $this->onGet($user, $obj_packet);
-                                } elseif ($obj_packet->type == "POST") {
-                                    $this->onPost($user, $obj_packet);
+                                        return;
+                                    }
+                                    $nb_tick_current = round((microtime(true) - $timings) * 1000, 3);
+                                    $average_percent = number_format($nb_tick_current / 1000 * 100, 2);
+                                    $this->logInfo("Load average: " . $this->charAuto($average_percent . "%", 10) . "  " . $this->charAuto($obj_packet->type, 8) . "   " . $this->charAuto($_SERVER['REMOTE_ADDR'], 18) . "  [x] => " . $obj_packet->path);
+                                    $env->unset();
+
+
                                 } else {
-                                    $this->logError($message_decode);
-
-                                    return;
+                                    $this->logError("Un packet recu est incorect\n" . $message_decode);
                                 }
-                                $nb_tick_current = round((microtime(true) - $timings) * 1000, 3);
-                                $average_percent = number_format($nb_tick_current / 1000 * 100, 2);
-                                $this->logInfo("Load average: " . $this->charAuto($average_percent . "%", 10) . "  " . $this->charAuto($obj_packet->type, 8) . "   " . $this->charAuto($_SERVER['REMOTE_ADDR'], 18) . "  [x] => " . $obj_packet->path);
-                                $env->unset();
-
-
                             } else {
-                                $this->logError("Un packet recu est incorect\n" . $message_decode);
+                                $this->logError("Error Packet is not a json packet\n" . $message_decode);
                             }
-                        } else {
-                            $this->logError("Error Packet is not a json packet\n" . $message_decode);
-                        }
                             gc_collect_cycles(); //Passage du garbage collector
                         } catch (\Exception $e) {
                             $this->logError($e);
@@ -659,20 +658,20 @@ abstract protected function connected(WebSocketUser $user);
         return $effectiveMask ^ $payload;
     }
 
-public function isJson($string)
+    public function isJson($string)
     {
         json_decode($string);
 
         return (json_last_error() == JSON_ERROR_NONE);
     }
 
-abstract protected function onUpdate(WebSocketUser $user, BasePacket $message);
+    abstract protected function onUpdate(WebSocketUser $user, BasePacket $message);
 
-abstract protected function onLoad(WebSocketUser $user, BasePacket $message);
+    abstract protected function onLoad(WebSocketUser $user, BasePacket $message);
 
-abstract protected function onGet(WebSocketUser $user, BasePacket $message);
+    abstract protected function onGet(WebSocketUser $user, BasePacket $message);
 
-abstract protected function onPost(WebSocketUser $user, BasePacket $message);
+    abstract protected function onPost(WebSocketUser $user, BasePacket $message);
 
     public function logInfo($msg)
     {

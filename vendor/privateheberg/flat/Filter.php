@@ -22,6 +22,7 @@ class Filter
         if (!preg_match("#[a-zA-Z]+#", $string)) {
             return false;
         }
+
         return true;
     }
 

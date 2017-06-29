@@ -12,6 +12,6 @@ class FullAccessRule extends Rule
 
     public function setAccess($args, $method, $_route, $target)
     {
-       $this->allowAccess(true);
+        $this->allowAccess(true);
     }
 }

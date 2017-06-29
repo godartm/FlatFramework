@@ -19,6 +19,7 @@ class ClassManager
 
     /**
      * Get all class on namespace
+     *
      * @param $namespace
      *
      * @return array

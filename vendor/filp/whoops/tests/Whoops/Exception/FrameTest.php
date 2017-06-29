@@ -11,6 +11,17 @@ use Whoops\TestCase;
 class FrameTest extends TestCase
 {
     /**
+     * @covers Whoops\Exception\Frame::getFile
+     */
+    public function testGetFile()
+    {
+        $data = $this->getFrameData();
+        $frame = $this->getFrameInstance($data);
+
+        $this->assertEquals($frame->getFile(), $data['file']);
+    }
+
+    /**
      * @return array
      */
     private function getFrameData()
@@ -26,6 +37,7 @@ class FrameTest extends TestCase
 
     /**
      * @param  array $data
+     *
      * @return Frame
      */
     private function getFrameInstance($data = null)
@@ -38,22 +50,11 @@ class FrameTest extends TestCase
     }
 
     /**
-     * @covers Whoops\Exception\Frame::getFile
-     */
-    public function testGetFile()
-    {
-        $data  = $this->getFrameData();
-        $frame = $this->getFrameInstance($data);
-
-        $this->assertEquals($frame->getFile(), $data['file']);
-    }
-
-    /**
      * @covers Whoops\Exception\Frame::getLine
      */
     public function testGetLine()
     {
-        $data  = $this->getFrameData();
+        $data = $this->getFrameData();
         $frame = $this->getFrameInstance($data);
 
         $this->assertEquals($frame->getLine(), $data['line']);
@@ -64,7 +65,7 @@ class FrameTest extends TestCase
      */
     public function testGetClass()
     {
-        $data  = $this->getFrameData();
+        $data = $this->getFrameData();
         $frame = $this->getFrameInstance($data);
 
         $this->assertEquals($frame->getClass(), $data['class']);
@@ -75,7 +76,7 @@ class FrameTest extends TestCase
      */
     public function testGetFunction()
     {
-        $data  = $this->getFrameData();
+        $data = $this->getFrameData();
         $frame = $this->getFrameInstance($data);
 
         $this->assertEquals($frame->getFunction(), $data['function']);
@@ -86,7 +87,7 @@ class FrameTest extends TestCase
      */
     public function testGetArgs()
     {
-        $data  = $this->getFrameData();
+        $data = $this->getFrameData();
         $frame = $this->getFrameInstance($data);
 
         $this->assertEquals($frame->getArgs(), $data['args']);
@@ -97,7 +98,7 @@ class FrameTest extends TestCase
      */
     public function testGetFileContents()
     {
-        $data  = $this->getFrameData();
+        $data = $this->getFrameData();
         $frame = $this->getFrameInstance($data);
 
         $this->assertEquals($frame->getFileContents(), file_get_contents($data['file']));
@@ -108,7 +109,7 @@ class FrameTest extends TestCase
      */
     public function testGetFileLines()
     {
-        $data  = $this->getFrameData();
+        $data = $this->getFrameData();
         $frame = $this->getFrameInstance($data);
 
         $lines = explode("\n", $frame->getFileContents());
@@ -120,7 +121,7 @@ class FrameTest extends TestCase
      */
     public function testGetFileLinesRange()
     {
-        $data  = $this->getFrameData();
+        $data = $this->getFrameData();
         $frame = $this->getFrameInstance($data);
 
         $lines = $frame->getFileLines(0, 3);
@@ -136,7 +137,7 @@ class FrameTest extends TestCase
      */
     public function testGetComments()
     {
-        $frame    = $this->getFrameInstance();
+        $frame = $this->getFrameInstance();
         $testComments = [
             'Dang, yo!',
             'Errthangs broken!',
@@ -162,7 +163,7 @@ class FrameTest extends TestCase
      */
     public function testGetFilteredComments()
     {
-        $frame    = $this->getFrameInstance();
+        $frame = $this->getFrameInstance();
         $testComments = [
             ['Dang, yo!', 'test'],
             ['Errthangs broken!', 'test'],
@@ -186,15 +187,15 @@ class FrameTest extends TestCase
      */
     public function testFrameIsSerializable()
     {
-        $data            = $this->getFrameData();
-        $frame           = $this->getFrameInstance();
-        $commentText     = "Gee I hope this works";
-        $commentContext  = "test";
+        $data = $this->getFrameData();
+        $frame = $this->getFrameInstance();
+        $commentText = "Gee I hope this works";
+        $commentContext = "test";
 
         $frame->addComment($commentText, $commentContext);
 
         $serializedFrame = serialize($frame);
-        $newFrame        = unserialize($serializedFrame);
+        $newFrame = unserialize($serializedFrame);
 
         $this->assertInstanceOf('Whoops\\Exception\\Frame', $newFrame);
         $this->assertEquals($newFrame->getFile(), $data['file']);
@@ -213,6 +214,6 @@ class FrameTest extends TestCase
     {
         $frame1 = $this->getFrameInstance(['line' => 1, 'file' => 'test-file.php']);
         $frame2 = $this->getFrameInstance(['line' => 1, 'file' => 'test-file.php']);
-        $this->assertTrue ($frame1->equals($frame2));
+        $this->assertTrue($frame1->equals($frame2));
     }
 }
