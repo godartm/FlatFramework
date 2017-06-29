@@ -10,9 +10,7 @@ namespace PrivateHeberg\Flat;
 
 
 use PrivateHeberg\Flat\Event\Event;
-use PrivateHeberg\Flat\Event\EventWrapper\CustomEvent;
 use PrivateHeberg\Flat\Event\EventWrapper\GetGlobalUpdaterEvent;
-use PrivateHeberg\ORM;
 
 class Controller
 {
@@ -31,7 +29,7 @@ class Controller
      *
      * @param int $id
      *
-     * @return ORM
+     * @return \NotORM
      */
     public function getDatabase($id = 0)
     {

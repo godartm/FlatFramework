@@ -17,6 +17,7 @@ use PrivateHeberg\Flat\Event\Event;
 use PrivateHeberg\Flat\Event\EventWrapper\GetUserInfoEvent;
 use PrivateHeberg\Flat\Exception\RouterNotFoundException;
 use PrivateHeberg\Flat\Threading\Thread;
+use PrivateHeberg\Flat\Tool\Cryptographie;
 use PrivateHeberg\ORM;
 
 class BasicWrapper
@@ -197,24 +198,29 @@ class BasicWrapper
 
     public static function render($view_name, $model, $update = false)
     {
+        if (!$update) {
+            return self::nativeRender(_CONFIG['dirs']['template'] . '/', $view_name, $model);
 
+        } else {
+            return self::nativeRender(_CONFIG['dirs']['template'] . '/updateable/', $view_name, $model);
+        }
+    }
+
+    public static function nativeRender($view_path, $view_name, $model)
+    {
         global $_GLOBAL;
 
 
         $ri = new RenderInstance();
         $ri->setViewName($view_name);
-        if (!$update) {
-            $ri->setViewPath(_CONFIG['dirs']['template'] . '/');
-        } else {
-            $ri->setViewPath(_CONFIG['dirs']['template'] . '/updateable/');
-        }
+
+        $ri->setViewPath($view_path);
+
         $ri->setViewPathCached(_CONFIG['dirs']['tmp'] . '/view/');
         $ri->setModel(array_merge($model, array('global' => $_GLOBAL)));
         $data = new Templating($ri);
 
         return $data->get();
-
-
     }
 
     /**
@@ -243,6 +249,7 @@ class BasicWrapper
 
     /**
      * Make database with cache system
+     *
      * @param $id
      */
     private static function makeDatabase($id)
@@ -269,7 +276,7 @@ class BasicWrapper
 
     }
 
-    public static function getEmailer(int $sid = 0)
+    public static function getEmailer($sid = 0)
     {
         return new EmailManager($sid);
     }

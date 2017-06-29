@@ -3,6 +3,7 @@
 namespace PrivateHeberg\Flat;
 
 
+use PrivateHeberg\Flat\ErrorReporting\ErrorController;
 use PrivateHeberg\Flat\Event\Event;
 use PrivateHeberg\Flat\Event\EventWrapper\FinishLoadEvent;
 use PrivateHeberg\Flat\Event\EventWrapper\ViolationEvent;
@@ -11,6 +12,8 @@ use PrivateHeberg\Flat\Exception\BadRouteSyntaxeException;
 use PrivateHeberg\Flat\Exception\BootstrapArgumentException;
 use PrivateHeberg\Flat\Exception\ControllerNotFoundException;
 use PrivateHeberg\Flat\Exception\RouterNotFoundException;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 
 class Bootstrap
 {
@@ -22,24 +25,6 @@ class Bootstrap
     {
 
 
-        set_exception_handler(
-            function ($exception) {
-
-                $violation = new ViolationEvent();
-                $violation->setMessage($exception->getMessage());
-                $violation->setType("Exception");
-                Event::call('onViolation', $violation);
-            });
-
-
-        set_error_handler(function ($errno, $errstr, $file) {
-
-            $violation = new ViolationEvent();
-            $violation->setMessage($errstr);
-            $violation->setType("Error");
-            Event::call('onViolation', $violation);
-        });
-
         $router = new Router();
 
 
@@ -50,7 +35,6 @@ class Bootstrap
             } else {
                 throw new RouterNotFoundException("Cannot find router on " . $rt);
             }
-
         }
         $this->router = $router;
         //Removing blade cache if developper use dev environement

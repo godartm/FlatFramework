@@ -20,7 +20,7 @@ abstract class Rule
      * @param bool $result Definit si l'accées a la page est autorisé
      * @param String $redirect lien de redirection si null page blanche
      */
-    public function allowAccess(bool $result, String $redirect = null)
+    public function allowAccess($result, $redirect = null)
     {
         $this->access = ['res' => $result, 'redirect' => $redirect];
     }

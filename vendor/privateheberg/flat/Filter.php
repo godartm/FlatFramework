@@ -11,29 +11,18 @@ class Filter
      *
      * @return bool
      */
-    public function name($string)
+    public function isStrongPassword($string)
     {
-        return ctype_alpha($string);
-    }
-
-    /**
-     * @param $string string
-     *
-     * @return bool
-     */
-    public function address($string)
-    {
-        return ctype_alnum($string);
-    }
-
-    /**
-     * @param $string string
-     *
-     * @return bool
-     */
-    public function tel($string)
-    {
-        return ctype_digit($string) && strlen($string) == 10;
+        if (strlen($string) < 8) {
+            return false;
+        }
+        if (!preg_match("#[0-9]+#", $string)) {
+            return false;
+        }
+        if (!preg_match("#[a-zA-Z]+#", $string)) {
+            return false;
+        }
+        return true;
     }
 
     /**

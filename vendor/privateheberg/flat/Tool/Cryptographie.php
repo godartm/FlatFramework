@@ -6,8 +6,10 @@
  * Time: 23:26
  */
 
-namespace PrivateHeberg\Flat;
+namespace PrivateHeberg\Flat\Tool;
 
+
+use PrivateHeberg\Flat\BasicWrapper;
 
 class Cryptographie
 {
