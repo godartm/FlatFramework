@@ -16,13 +16,14 @@ class ComposerStaticInit10d375dfc244cc7cf6ed7755b5e6f307
         array (
             'Xiaoler\\Blade\\' => 14,
         ),
+        'W' => 
+        array (
+            'Whoops\\' => 7,
+        ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'PrivateHeberg\\Flat\\' => 19,
-        ),
-        'I' => 
-        array (
-            'Infra\\' => 6,
         ),
     );
 
@@ -31,13 +32,17 @@ class ComposerStaticInit10d375dfc244cc7cf6ed7755b5e6f307
         array (
             0 => __DIR__ . '/..' . '/xiaoler/blade/src',
         ),
+        'Whoops\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'PrivateHeberg\\Flat\\' => 
         array (
             0 => __DIR__ . '/..' . '/privateheberg/flat',
-        ),
-        'Infra\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/../Infra',
         ),
     );
 
