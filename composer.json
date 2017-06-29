@@ -1,0 +1,12 @@
+{
+  "require": {
+    "xiaoler/blade": "dev-master",
+    "vrana/notorm": "dev-master",
+    "filp/whoops": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "PrivateHeberg\\Flat\\": "vendor/privateheberg/flat/"
+    }
+  }
+}
