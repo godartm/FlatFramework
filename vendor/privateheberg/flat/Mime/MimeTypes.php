@@ -56,7 +56,7 @@ class MimeTypes implements MimeTypesInterface
         if (self::$built_in === null) {
             self::$built_in = require(dirname(__DIR__) . '/mime.types.php');
         }
-
+        /** @noinspection PhpIncludeInspection */
         return self::$built_in;
     }
 

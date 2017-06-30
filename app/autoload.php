@@ -39,6 +39,9 @@ foreach (glob(__DIR__ . '/../app/task/*/*/*.php') as $file) { // iterate files
     include $file;
 }
 
+foreach (glob(__DIR__ . "/../app/model/*.php") as $filename) {
+    include $filename;
+}
 
 foreach (glob(__DIR__ . "/../controller/*.php") as $filename) {
     include $filename;

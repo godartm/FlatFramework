@@ -39,6 +39,7 @@ class MimeMappingBuilder
      */
     public static function load($file)
     {
+        /** @noinspection PhpIncludeInspection */
         return new self(require($file));
     }
 

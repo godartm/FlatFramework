@@ -27,6 +27,7 @@ class Bootstrap
         //Loading all route
         foreach (_CONFIG['dirs']['router'] as $rt) {
             if (file_exists($rt)) {
+                /** @noinspection PhpIncludeInspection */
                 include $rt;
             } else {
                 throw new RouterNotFoundException("Cannot find router on " . $rt);

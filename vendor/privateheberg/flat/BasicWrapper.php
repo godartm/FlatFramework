@@ -86,6 +86,7 @@ class BasicWrapper
         if (count($explode) > 1) {
             $trans_dir = _CONFIG['dirs']['trans'] . '/' . $lang . '/' . $default_lang . '/' . $explode[0] . '.php';
             if (file_exists($trans_dir)) {
+                /** @noinspection PhpIncludeInspection */
                 include($trans_dir);
                 $stringacc = str_replace($explode[0] . '.', '', $string);
                 if (isset($TRANS[$stringacc])) {
@@ -139,6 +140,7 @@ class BasicWrapper
         //Loading all route
         foreach (_CONFIG['dirs']['router'] as $rt) {
             if (file_exists($rt)) {
+                /** @noinspection PhpIncludeInspection */
                 include $rt;
             } else {
                 throw new RouterNotFoundException("Cannot find router on " . $rt);

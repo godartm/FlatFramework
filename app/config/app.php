@@ -26,7 +26,7 @@ $_CONFIG = [
     ],
     'database'              => [
         [
-            'host'     => 'localhost',
+            'host'     => '',
             'username' => '',
             'password' => '',
             'database' => '',

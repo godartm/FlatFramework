@@ -37,9 +37,11 @@ interface MimeTypesInterface
     /**
      * Get all file extensions (without the dots) that match the given MIME type.
      *
-     * @param string $extension The file extension to check.
+     * @param $mime_type String define mime type
      *
      * @return array An array of file extensions that match the given MIME type; can be empty.
+     * @internal param string $extension The file extension to check.
+     *
      */
     public function getAllExtensions($mime_type);
 }

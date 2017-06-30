@@ -1,5 +1,8 @@
 <?php
+use DBModel\Utilisateur;
 use PrivateHeberg\Flat\Controller;
+use PrivateHeberg\Flat\ORM\ORM;
+
 
 /**
  * Created by PhpStorm.
@@ -11,6 +14,15 @@ class HomeController extends Controller
 {
     public function defaultAction()
     {
+
+        $utilisateurs = new Utilisateur(0);
+
+        $data = $utilisateurs->getAll();
+
+       foreach ($data as $d) {
+          echo $d->name;
+          break;
+       }
 
     }
 }

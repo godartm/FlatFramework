@@ -2,7 +2,8 @@
   "require": {
     "xiaoler/blade": "dev-master",
     "vrana/notorm": "dev-master",
-    "filp/whoops": "dev-master"
+    "filp/whoops": "dev-master",
+    "phpmailer/phpmailer": "^5.2"
   },
   "autoload": {
     "psr-4": {
