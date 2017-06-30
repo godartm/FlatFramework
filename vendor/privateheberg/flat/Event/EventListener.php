@@ -12,7 +12,7 @@ namespace PrivateHeberg\Flat\Event;
 use PrivateHeberg\Flat\Event\EventWrapper\FinishLoadEvent;
 use PrivateHeberg\Flat\Event\EventWrapper\GetGlobalUpdaterEvent;
 use PrivateHeberg\Flat\Event\EventWrapper\GetUserInfoEvent;
-use PrivateHeberg\Flat\Event\EventWrapper\ViolationEvent;
+use PrivateHeberg\Flat\Exception\NotImplementedException;
 
 
 /**
@@ -21,45 +21,53 @@ use PrivateHeberg\Flat\Event\EventWrapper\ViolationEvent;
  */
 class  EventListener
 {
+
     /**
-     * On page Load
+     * Calback call after page login
      *
      * @param FinishLoadEvent $e
+     *
+     * @throws NotImplementedException
      */
     public function onFinishLoader(FinishLoadEvent $e)
     {
         //IT'S A VIRTUAL METHOD
+
+        throw new NotImplementedException("onFinishLoader is not implemented on yours listener");
     }
 
+
     /**
-     * On User Get indo action
+     * Call on get player info
      *
-     * @param FinishLoadEvent $e
+     * @param GetUserInfoEvent $e
+     *
+     * @return string
+     * @throws NotImplementedException
      */
     public function onGetUserInfo(GetUserInfoEvent $e)
     {
         //IT'S A VIRTUAL METHOD
+
+        throw new NotImplementedException("onFinishLoader is not implemented on yours listener");
     }
 
+
     /**
-     * On get global updater
+     * Call on Update return update for all website page
      *
-     * @param FinishLoadEvent $e
+     * @param GetGlobalUpdaterEvent $e
+     *
+     * @throws NotImplementedException
      */
     public function onGetGlobalUpdater(GetGlobalUpdaterEvent $e)
     {
         //IT'S A VIRTUAL METHOD
+
+        throw new NotImplementedException("onFinishLoader is not implemented on yours listener");
     }
 
-    /**
-     * On Error
-     *
-     * @param FinishLoadEvent $e
-     */
-    public function onViolation(ViolationEvent $e)
-    {
-        //IT'S A VIRTUAL METHOD
-    }
+
 
 }
 

@@ -11,7 +11,7 @@ namespace PrivateHeberg\Flat;
 class DefaultRule extends Rule
 {
 
-    public function setAccess($args)
+    public function setAccess($args, $method, $_route, $target)
     {
         if (_CONFIG['firewallDefaultPolicy']) {
             $this->allowAccess(true);

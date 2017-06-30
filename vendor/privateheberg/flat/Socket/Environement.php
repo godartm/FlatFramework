@@ -16,7 +16,6 @@ class Environement
 {
 
     private $session_id;
-    private $sqllite;
 
     public function __construct(WebSocketUser $user, BasePacket $packet)
     {
@@ -156,8 +155,8 @@ class Environement
                         $img_data = str_replace(' ', '+', $img_data);
                         $data = base64_decode($img_data);
                         $file = __DIR__ . '/../../../../app/tmp/upload/' . uniqid() . '.' . $ext;
-                        $success = file_put_contents($file, $data);
-                        print $success ? $file : 'Unable to save the file.';
+                        file_put_contents($file, $data);
+
 
 
                         $_FILES[$value['name']] = $file;

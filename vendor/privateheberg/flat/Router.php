@@ -271,11 +271,11 @@ class Router
                         if ($has_access['redirect'] != null) {
                             $this->redirect($has_access['redirect']);
 
-                            return;
+                            return array();
                         } else {
                             $this->redirect(_CONFIG['conf']['404']['url']);
 
-                            return;
+                            return array();
                         }
                     }
 

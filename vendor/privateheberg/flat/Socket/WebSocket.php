@@ -165,6 +165,7 @@ abstract class WebSocket
 
     protected function frame($message, $user, $messageType = 'text', $messageContinues = false)
     {
+        $b1 = 0;
         switch ($messageType) {
             case 'continuous':
                 $b1 = 0;
@@ -185,6 +186,7 @@ abstract class WebSocket
                 $b1 = 10;
                 break;
         }
+
         if ($messageContinues) {
             $user->sendingContinuous = true;
         } else {
@@ -569,6 +571,7 @@ abstract class WebSocket
                 return "";
             case 9:
                 $pongReply = true;
+                break;
             case 10:
                 break;
             default:

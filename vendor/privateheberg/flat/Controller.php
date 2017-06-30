@@ -21,7 +21,6 @@ class Controller
     public  $view_path_cached;
     public  $view_name;
     public  $action;
-    private $router;
 
 
     /**

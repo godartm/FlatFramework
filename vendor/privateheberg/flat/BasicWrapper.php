@@ -18,11 +18,9 @@ use PrivateHeberg\Flat\Event\EventWrapper\GetUserInfoEvent;
 use PrivateHeberg\Flat\Exception\RouterNotFoundException;
 use PrivateHeberg\Flat\Threading\Thread;
 use PrivateHeberg\Flat\Tool\Cryptographie;
-use PrivateHeberg\ORM;
 
 class BasicWrapper
 {
-    private static $fileloader;
     /**
      * @var Database[]
      */

@@ -42,7 +42,7 @@ class SessionManager
                 $notORM = new \NotORM($this->sqllite);
 
                 $time_to_valid = time() - 172800;
-                $list = $notORM->sessions()->where('time <= ?', $time_to_valid)->delete();
+                $notORM->sessions()->where('time <= ?', $time_to_valid)->delete();
             } catch (\Exception $e) {
                 print $e;
                 $_SESSION = [];
