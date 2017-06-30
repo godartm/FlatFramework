@@ -28,7 +28,7 @@ class Controller
      * Retourne une instance de ORM pour l'accées a la database
      *
      * @param int $id
-     *
+     * @deprecated
      * @return \NotORM
      */
     public function getDatabase($id = 0)
