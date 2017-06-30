@@ -437,7 +437,7 @@ abstract class WebSocket
 
             //split frame from packet and process it
             $frame = substr($fullpacket, $frame_pos, $framesize);
-            if (($message = $this->deframe($frame, $user, $headers)) !== false) {
+            if (($message = $this->deframe($frame, $user)) !== false) {
                 if ($user->hasSentClose) {
                     $this->disconnect($user->socket);
                 } else {
