@@ -59,7 +59,7 @@ class Thread
      */
     public function run()
     {
-        shell_exec('nohup php ' . __DIR__ . '/../../../../console/runnable.php ' . $this->thread_id . ' > /dev/null 2>&1 &');
+        shell_exec('nohup php ' . __DIR__ . '/../../../../bin/runnable.php ' . $this->thread_id . ' > /dev/null 2>&1 &');
 
         return $this->thread;
     }
