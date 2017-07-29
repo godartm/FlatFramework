@@ -1,7 +1,6 @@
 <?php
-use DBModel\Utilisateur;
+
 use PrivateHeberg\Flat\Controller;
-use PrivateHeberg\Flat\ORM\ORM;
 
 
 /**
@@ -10,11 +9,9 @@ use PrivateHeberg\Flat\ORM\ORM;
  * Date: 28/06/2017
  * Time: 17:46
  */
-class HomeController extends Controller
-{
+class HomeController extends Controller {
     public function defaultAction()
     {
-
 
         $this->render('home');
 
@@ -23,7 +20,7 @@ class HomeController extends Controller
     public function defaultUpdate()
     {
 
-        $this->update('#updateArea', rand(1,999999));
+        $this->update('#updateArea', rand(1, 999999));
         $this->result();
 
     }
