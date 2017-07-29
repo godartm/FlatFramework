@@ -15,14 +15,16 @@ class HomeController extends Controller
     public function defaultAction()
     {
 
-        $utilisateurs = new Utilisateur(0);
 
-        $data = $utilisateurs->getAll();
+        $this->render('home');
 
-       foreach ($data as $d) {
-          echo $d->name;
-          break;
-       }
+    }
+
+    public function defaultUpdate()
+    {
+
+        $this->update('#updateArea', rand(1,999999));
+        $this->result();
 
     }
 }
