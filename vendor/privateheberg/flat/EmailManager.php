@@ -5,6 +5,7 @@ namespace PrivateHeberg\Flat;
 
 use Exception;
 use PHPMailer;
+use PrivateHeberg\Flat\Event\Event;
 
 class EmailManager
 {
@@ -60,6 +61,21 @@ class EmailManager
             throw $ex;
 
         }
+    }
+
+    /**
+     * Permet d'envoyé un email par template
+     * Resuire l'implementation de Event onSendEmailByTemplate
+     *
+     * @param $name string Nom de la template
+     * @param $args array Args qui remplis la template
+     * @param $email_adresse array Email adresse du mec
+     */
+    public function sendMailByTemplate($name, $args, $email_adresse)
+    {
+        $html_email = Event::call('onSendEmailByTemplate', ['template_name' => $name, 'args' => $args]);
+        if (isset($html_email['html']) && isset($html_email['titre']))
+            $this->sendMail($html_email['html'], $email_adresse, $html_email['titre']);
     }
 }
 
