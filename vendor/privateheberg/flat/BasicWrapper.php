@@ -199,10 +199,10 @@ class BasicWrapper
     public static function render($view_name, $model, $update = false)
     {
         if (!$update) {
-            return self::nativeRender(_CONFIG['dirs']['template'] . '/', $view_name, $model);
+            return self::nativeRender(_CONFIG['dirs']['static_template'] . '/', $view_name, $model);
 
         } else {
-            return self::nativeRender(_CONFIG['dirs']['template'] . '/updateable/', $view_name, $model);
+            return self::nativeRender(_CONFIG['dirs']['dyn_template'] . '/', $view_name, $model);
         }
     }
 

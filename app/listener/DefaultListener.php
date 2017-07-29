@@ -11,8 +11,7 @@ use PrivateHeberg\Flat\Event\EventWrapper\GetUserInfoEvent;
  * Date: 22/02/2017
  * Time: 05:50
  */
-class DefaultListener extends EventListener
-{
+class DefaultListener extends EventListener {
 
     public function onFinishLoader(FinishLoadEvent $e)
     {
@@ -27,6 +26,21 @@ class DefaultListener extends EventListener
     public function onGetGlobalUpdater(GetGlobalUpdaterEvent $e)
     {
 
+    }
+
+    public function onSendEmailByTemplate($array)
+    {
+        try {
+
+
+            $tempalte = $array['template_name'];  //name of template
+            $template_info = $array['args'];  //args for buld template (ex title, unsubscribe link ... .... ...)
+
+
+            return ['html' => '<b>My template body</b>', 'titre' => 'My Template title'];
+        } catch (Exception $e) {
+
+        }
     }
 
 
